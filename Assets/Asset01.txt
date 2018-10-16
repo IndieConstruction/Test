@@ -1,1 +1,3 @@
+Modificato nuovo asset01
 Nuovo Asset
+... altre modifiche
