@@ -164,6 +164,19 @@
 		margin: 7px;
 		width: 26px;
 	}
+	.rectangle {
+		position: relative;
+
+		width: device-width; 
+		height: 20px; 
+		background-color: black;
+
+		font-size: 0.8rem; 
+		color: #909090; 
+		text-align: center; 
+		padding-top:0px;
+		z-index: 100;
+	}
   </style>
   <script src="svg-inject.min.js"></script>
 </head>
@@ -173,9 +186,12 @@
   <div onclick="showSlideDescription()" class="toggle_info"><img src="Info@2x.png"/></div>
   <div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
   <div class="swiper-container">
+	<div class="rectangle">Nokia DBS Cabinets</div>
+	<!--
     <div id="rectangle" style= "width: device-width; height: 20px; background-color: black; margin-bottom: ">
 		<p style="font-size: 0.8rem; color: #909090; text-align: center; padding-top:0px;4px;z-index: 100;"><b>Nokia DBS Cabinets</b></p>
 	</div>
+	-->
     <div class="swiper-wrapper">
 	
       <div class="swiper-slide">
