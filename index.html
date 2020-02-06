@@ -343,9 +343,9 @@
     var swiper = new Swiper('.swiper-container', {
 		followFinger: false,
 
+		/*
 		preloadImages: false,
 		updateOnImagesReady: false,
-		/*
 		roundLengths: true,
 		watchOverflow: true,
 		allowTouchMove:false,
@@ -354,7 +354,7 @@
 	  zoom: {
 		maxRatio:6,
 		minRatio:1,
-		toggle: false,
+		toggle: true,
 		containerClass: 'swiper-zoom-container', 
 		zoomedSlideClass: 'center-fit', 
 	  },
@@ -397,13 +397,11 @@
 	}
 	
 	swiper.on('zoomChange', function () {
-	/*
 	  removeElementsByClass("label");
 	  // removeElementsByClass("dot");
 	  DisableAllDescriptionBoxs();
 	  clearDots();
 	  placeDots();
-	 */
 	});
 
 	swiper.on('touchEnd', function () {
