@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Nokia DBS 9928</title>
-  <meta name="viewport" viewport-fit=cover content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
   <!-- Link Swiper's CSS -->
   <link rel="stylesheet" href="swiper.min.css">
@@ -26,6 +26,15 @@
       margin: 0;
       padding: 0;
     }
+
+	image {
+		image-rendering: -moz-crisp-edges;         /* Firefox */
+		image-rendering:   -o-crisp-edges;         /* Opera */
+		image-rendering: -webkit-optimize-contrast;/* Webkit (non-standard naming) */
+		image-rendering: crisp-edges;
+		-ms-interpolation-mode: nearest-neighbor;  /* IE (non-standard property) */
+	}
+
     .swiper-container {
       width: 100%;
       height: 100%;
@@ -47,6 +56,7 @@
       -webkit-align-items: center;
       align-items: center;
     }
+
 	* {
             margin: 0;
             padding: 0;
@@ -91,7 +101,8 @@
 		h2,p{
 			padding:10px;
 		}
-		.info{
+
+	.info{
     position: absolute;
     top: 100px;
     right: 50px;
@@ -342,7 +353,6 @@
   
     var swiper = new Swiper('.swiper-container', {
 		followFinger: false,
-
 		/*
 		preloadImages: false,
 		updateOnImagesReady: false,
@@ -354,7 +364,7 @@
 	  zoom: {
 		maxRatio:6,
 		minRatio:1,
-		toggle: true,
+		toggle: false,
 		containerClass: 'swiper-zoom-container', 
 		zoomedSlideClass: 'center-fit', 
 	  },
