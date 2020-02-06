@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg class="center-fit" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<ellipse cx="14" cy="14"  fill="rgba(0,201,255,1)" rx="4" ry="4" >
+	</ellipse>
+	<ellipse  cx="14" cy="14"  fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="2px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" rx="14" ry="14">
+	</ellipse>
+</svg>
