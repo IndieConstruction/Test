@@ -269,10 +269,68 @@
     <div id="nok-pagination" class="swiper-pagination"></div>
   </div>
   <script src="swiper.min.js"></script>
+  
+  
+<!-- INIT -->
   <script>
+  	/// --------------------------------------------
+	/// Init Swiper
+	/// --------------------------------------------
+	var pt;
+	var olddataId;
+	var infoWindowHeight = 300;
 	var oldLabel = "";
+	var swiper = new Swiper('.swiper-container', {
+		followFinger: false,
+		/*
+		preloadImages: false,
+		updateOnImagesReady: false,
+		roundLengths: true,
+		watchOverflow: true,
+		allowTouchMove:false,
+		preventInteractionOnTransition:true,
+		*/
+		zoom: {
+			maxRatio:6,
+			minRatio:1,
+			toggle: true,
+			containerClass: 'swiper-zoom-container', 
+			zoomedSlideClass: 'center-fit', 
+		},
+			pagination: {
+			el: '.swiper-pagination',
+		}
+    });
 	
-	var data = {
+	window.onload = function(){
+		addregisterTransitionEndEvent(document.getElementById("slide_1"));
+		addregisterTransitionEndEvent(document.getElementById("slide_2"));
+		addregisterTransitionEndEvent(document.getElementById("slide_3"));
+		addregisterTransitionEndEvent(document.getElementById("slide_4"));		
+		addregisterTransitionEndEvent(document.getElementById("slide_5"));	
+		addregisterTransitionEndEvent(document.getElementById("slide_1_container"));
+		addregisterTransitionEndEvent(document.getElementById("slide_2_container"));
+		addregisterTransitionEndEvent(document.getElementById("slide_3_container"));
+		addregisterTransitionEndEvent(document.getElementById("slide_4_container"));		
+		addregisterTransitionEndEvent(document.getElementById("slide_5_container"));	
+	};
+	document.getElementById("slide_5").addEventListener('click', function (event) {
+		pt = document.getElementById("slide_5").createSVGPoint();
+		alert_coords(event);
+	});
+	
+
+  </script>
+<!-- -->
+  
+<!-- DATA -->
+  <script>
+  
+  	/// --------------------------------------------------------------
+	/// DATA STRUCTURE
+	/// --------------------------------------------------------------
+
+		var data = {
 			dbs_1:{
 				title:"9928 OD (-48VDC) 1 ASMI (TDD + FDD)",
 				text:"The Nokia 9928 Distributed Base Station (DBS) is a multi-technology, multi-band remote RF solution in a single baseband footprint. The 9928 product supports CDMA and LTE in a variety of frequency blocks. It supports LTE with the 9926 d2U and offers flexible capacity for LTE carriers from 5Mhz wide and beyond. RF is supported via LTE-CDMA dual-technology remote radio heads - one for each supported frequency. The Remote RF provides superior coverage with minimal cable loss due to the close proximity to the antenna. Both remote radio heads are hardware ready for dual transmit LTE MIMO. The 9928 cabinet can accommodate various backhaul options included T1, Ethernet and Microwave."
@@ -350,198 +408,8 @@
 				text:"<strong>Airscale System Module</strong>  - LTE Bass Band Unit."
 			},
 		};
-  
-    var swiper = new Swiper('.swiper-container', {
-		followFinger: false,
-		/*
-		preloadImages: false,
-		updateOnImagesReady: false,
-		roundLengths: true,
-		watchOverflow: true,
-		allowTouchMove:false,
-		preventInteractionOnTransition:true,
-		*/
-	  zoom: {
-		maxRatio:6,
-		minRatio:1,
-		toggle: true,
-		containerClass: 'swiper-zoom-container', 
-		zoomedSlideClass: 'center-fit', 
-	  },
-      pagination: {
-        el: '.swiper-pagination',
-      }
-    });
-	
-	ShowHideResetView();
-	
-	swiper.on('transitionStart', function () {
-		var slideNumber = swiper.activeIndex;
-		var slide = document.getElementById("slide_"+slideNumber);
-		var container = document.getElementById("slide_"+slideNumber+"_container");
-		if(slide!=null)
-		slide.style.transform = "translate3d(0px, 0px, 0px) scale(1)";
-		if(container!=null)
-		container.style.transform = "translate3d(0px, 0px, 0px) scale(1)";
-	  // removeElementsByClass("label");
-	  removeElementsByClass("dot");
-	  console.log(swiper.activeIndex);
-	  DisableAllDescriptionBoxs();
-	  olddataId='';
-	});
-	
-	swiper.on('transitionEnd', function () {
-	  removeElementsByClass("dot");
-	  removeElementsByClass("label");
-	  clearDots();
-	  placeDots();
-	  ShowHideResetView();
-	});
-	
-	function DisableAllDescriptionBoxs(){
-	disableDescription("description_1");
-	disableDescription("description_2");
-	disableDescription("description_3");
-	disableDescription("description_4");
-	disableDescription("description_5");
-	}
-	
-	swiper.on('zoomChange', function () {
-	  removeElementsByClass("label");
-	  // removeElementsByClass("dot");
-	  DisableAllDescriptionBoxs();
-	  clearDots();
-	  placeDots();
-	});
 
-	swiper.on('touchEnd', function () {
-	  removeElementsByClass("label");
-	  DisableAllDescriptionBoxs();
-	  ShowHideResetView();
-	});
-
-	function ShowHideResetView(){
-		/*
-		  // Hide reset_view if zoom level il == 1
-		var element = document.getElementsByClassName("reset_view")[0];
-		if(swiper.zoom.scale == 1){
-			element.style.visibility = "hidden";
-		}else{
-			element.style.visibility = "visible";
-		}
-		*/
-	}
-
-	function zoomIn(){
-		swiper.zoom.in();
-	}
-	
-	function zoomOut(){
-		swiper.zoom.out();
-	}
-	
-	function resetZoom(){
-		swiper.zoom.out();
-		disableLabels();
-		clearDots();
-		placeDots();
-		ShowHideResetView();
-	}
-
-	var infoWindowHeight = 300;
-
-	function toggleLabel(text,element,direction,descriptionSizeCheck){		
-		removeElementsByClass("label");
-		if(oldLabel!=text && element){
-			oldLabel = text;
-			var label = document.createElement("div");
-			var html;
-			if(direction == 'right')
-				html = '<div class="container"><svg width="20" viewBox="0 0 24 2"><path fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="4px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Connection55" d="M 24 0 L 0 0"></path>/svg><div class="box">'+text+'</div></div>';
-			else
-				html = '<div class="container"><div class="box">'+text+'</div><svg width="20" viewBox="0 0 24 2"><path fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="4px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Connection55" d="M 24 0 L 0 0"></path>/svg></div>';
-			label.innerHTML = html;
-			label.classList.add("label");
-			document.body.appendChild(label);
-			console.log(element.getBoundingClientRect());
-			var pos = element.getBoundingClientRect();
-			var top = pos.top-label.offsetHeight/2+pos.height/2;
-			label.style.top = top+'px';
-			var left = pos.left+pos.width/2-(direction=='left' ? label.offsetWidth : 0);
-			label.style.left = left+'px';
-			// ---------------------------
-			if(descriptionSizeCheck == true){
-				var bottomCalc = screen.height - pos.y;
-				console.log("bottom " +  bottomCalc + " height " + infoWindowHeight);
-				if(bottomCalc < infoWindowHeight)
-					disableLabels();			
-			}
-			// ---------------------------
-		} else {
-			oldLabel = '';
-		}
-	}
-	
-	
-	function removeElementsByClass(className){
-    var elements = document.getElementsByClassName(className);
-    while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
-    }
-}
-
-
-	function disableLabels(){
-		removeElementsByClass("label");
-	}
-
-	function disableDescription(elementId){
-		var description = document.getElementById(elementId);
-		if (description.style.display !== "none") {
-			description.classList.add("w3-animate-bottom-out");
-			description.classList.remove("w3-animate-bottom");
-		} 
-		var pagination = document.getElementById("nok-pagination");
-		pagination.style.display = 'block';
-	}
-	
-	//function placeDot(slide,posTop,posLeft){
-	function placeDot(dotInfo, zoom){
-		var dot = document.createElement("div");
-		var html = '<?xml version="1.0" encoding="utf-8"?><svg height="30" width="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><ellipse  cx="15" cy="15"  fill="rgba(0,201,255,1)" rx="4" ry="4" ></ellipse><ellipse  cx="15" cy="15"  fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="2px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" rx="14" ry="14"></ellipse></svg>';
-		dot.innerHTML = html;
-		dot.classList.add("dot");
-		// document.body.appendChild(dot);
-		
-		var slide = document.getElementById(dotInfo.slide); //Get svg element
-		var newElement = document.createElementNS("http://www.w3.org/2000/svg","svg"); //Create a path in SVG's namespace
-		var innerhtml = '<ellipse  cx="'+dotInfo.x+'" cy="'+dotInfo.y+'"  fill="rgba(0,201,255,1)" rx="'+8/zoom+'" ry="'+8/zoom+'" ></ellipse><ellipse  cx="'+dotInfo.x+'" cy="'+dotInfo.y+'"   fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="'+4/zoom+'px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" rx="'+28/zoom+'" ry="'+28/zoom+'"></ellipse>';
-		newElement.innerHTML = innerhtml;
-		newElement.classList.add("dot");
-		slide.appendChild(newElement);
-		newElement.onclick = function() {
-			
-			if(dotInfo.descriptionField != ''){
-				toggleLabel(dotInfo.label,newElement,dotInfo.direction, true);
-				toggleDescription(dotInfo.descriptionId,dotInfo.descriptionField);
-			} else {
-				toggleLabel(dotInfo.label,newElement,dotInfo.direction, false);
-				disableDescription(dotInfo.descriptionId);
-			}
-		};
-	}
-	
-
-
-	function clearDots(){
-		var x = document.getElementsByClassName("dot");
-		var i;
-		for (i = 0; i < x.length; i++) {
-		  x[i].remove();
-		}
-	}
-	
-	var dots = [
+			var dots = [
 		{slide:"slide_1",x:144,y:228,label:'FYGE',direction:'right',descriptionId:'description_1',descriptionField:'FYGE'},
 		{slide:"slide_1",x:243,y:140,label:'ASMI',direction:'left',descriptionId:'description_1',descriptionField:'ASMI'},
 		{slide:"slide_1",x:243,y:279,label:'Power Injector Tray 2',direction:'right',descriptionId:'description_1',descriptionField:''},
@@ -650,45 +518,16 @@
 		{slide:"slide_5",x:620,y:1215,label:'Rectifier shelf 2',direction:'left',descriptionId:'description_5',descriptionField:''},
 		{slide:"slide_5",x:581,y:1437,label:'AC PDA',direction:'left',descriptionId:'description_5',descriptionField:'ACPDA'}
 		];
-	
-	function placeDots(){
-			for(var i = 0; i < dots.length; i++){
-			var slideNumber = swiper.activeIndex + 1;
-			if(dots[i].slide == "slide_" + slideNumber)
-				placeDot(dots[i],swiper.zoom.currentScale);
-			}
-	}
-		
-	clearDots();
-	placeDots();
-	
 
-	var olddataId;
-	function toggleDescription(elementId,dataId,hideLabels){
-		
-		var pagination = document.getElementById("nok-pagination");
-		
-		console.log(hideLabels);
-		if(hideLabels){
-			removeElementsByClass("label");
-			oldLabel='';
-		}
-		var description = document.getElementById(elementId);
-		if(dataId != olddataId){
-				pagination.style.display = 'none';
-				html="<h2>"+data[dataId].title+"</h2><p>"+data[dataId].text+"</p>";
-				description.innerHTML = html;
-				description.classList.remove("w3-animate-bottom-out");
-				description.classList.add("w3-animate-bottom");
-				//description.style.display = "block";
-				olddataId = dataId;
-		} else {
-			
-			disableDescription(elementId);
-			olddataId='';
-		}
-	}
-	
+	/// --------------------------------------------------------------
+	/// --------------------------------------------------------------
+  </script>
+<!-- -->
+
+<!-- SWIPER -->
+  <script>
+  	/// FUNCTIONS ----------------------------------
+
 	function registerTransitionEndEvent(obj, callback){
 		var transitions = {
 			'WebkitTransition' : 'webkitTransitionEnd',
@@ -739,42 +578,268 @@
 			//placeDots();
 		});
 	}
-	var pt;
-	window.onload = function(){
-		addregisterTransitionEndEvent(document.getElementById("slide_1"));
-		addregisterTransitionEndEvent(document.getElementById("slide_2"));
-		addregisterTransitionEndEvent(document.getElementById("slide_3"));
-		addregisterTransitionEndEvent(document.getElementById("slide_4"));		
-		addregisterTransitionEndEvent(document.getElementById("slide_5"));	
-		addregisterTransitionEndEvent(document.getElementById("slide_1_container"));
-		addregisterTransitionEndEvent(document.getElementById("slide_2_container"));
-		addregisterTransitionEndEvent(document.getElementById("slide_3_container"));
-		addregisterTransitionEndEvent(document.getElementById("slide_4_container"));		
-		addregisterTransitionEndEvent(document.getElementById("slide_5_container"));	
-	};
-	document.getElementById("slide_5").addEventListener('click', function (event) {
-		pt = document.getElementById("slide_5").createSVGPoint();
-		alert_coords(event);
-	});
+	
   
-    // Created once for document
+  	/// EVENTS CALLBACK ----------------------------
+	swiper.on('transitionStart', function () {
+		var slideNumber = swiper.activeIndex;
+		var slide = document.getElementById("slide_"+slideNumber);
+		var container = document.getElementById("slide_"+slideNumber+"_container");
+		if(slide!=null)
+		slide.style.transform = "translate3d(0px, 0px, 0px) scale(1)";
+		if(container!=null)
+		container.style.transform = "translate3d(0px, 0px, 0px) scale(1)";
+	  // removeElementsByClass("label");
+	  removeElementsByClass("dot");
+	  console.log(swiper.activeIndex);
+	  DisableAllDescriptionBoxs();
+	  olddataId='';
+	});
+	
+	swiper.on('transitionEnd', function () {
+	  removeElementsByClass("dot");
+	  removeElementsByClass("label");
+	  clearDots();
+	  placeDots();
+	  ShowHideResetView();
+	});
+	
+  </script>
+<!-- -->
 
-	function alert_coords(evt) {
-		pt.x = evt.clientX;
-		pt.y = evt.clientY;
+<!-- ZOOM -->
+  <script>
+  	/// FUNCTIONS ----------------------------------
+	function zoomIn(){
+		swiper.zoom.in();
+	}
+	
+	function zoomOut(){
+		swiper.zoom.out();
+	}
+	
+	function resetZoom(){
+		swiper.zoom.out();
+		disableLabels();
+		clearDots();
+		placeDots();
+		ShowHideResetView();
+	}
+	/// --------------------------------------------
 
-		// The cursor point, translated into svg coordinates
-		var cursorpt =  pt.matrixTransform(document.getElementById("slide_5").getScreenCTM().inverse());
-		console.log("x:" + Math.round(cursorpt.x) + ",y:" + Math.round(cursorpt.y));
+	/// EVENTS CALLBACK ----------------------------
+	swiper.on('zoomChange', function () {
+	  removeElementsByClass("label");
+	  // removeElementsByClass("dot");
+	  DisableAllDescriptionBoxs();
+	  clearDots();
+	  placeDots();
+	});
+  </script>
+<!-- -->
+
+<!-- TOUCH -->
+  <script>
+  	swiper.on('touchEnd', function () {
+	  removeElementsByClass("label");
+	  DisableAllDescriptionBoxs();
+	  ShowHideResetView();
+	});
+  </script>
+<!-- -->
+  
+<!-- DOTS -->
+  <script>
+  	//function placeDot(slide,posTop,posLeft){
+	function placeDot(dotInfo, zoom){
+		var dot = document.createElement("div");
+		var html = '<?xml version="1.0" encoding="utf-8"?><svg height="30" width="30" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><ellipse  cx="15" cy="15"  fill="rgba(0,201,255,1)" rx="4" ry="4" ></ellipse><ellipse  cx="15" cy="15"  fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="2px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" rx="14" ry="14"></ellipse></svg>';
+		dot.innerHTML = html;
+		dot.classList.add("dot");
+		// document.body.appendChild(dot);
 		
+		var slide = document.getElementById(dotInfo.slide); //Get svg element
+		var newElement = document.createElementNS("http://www.w3.org/2000/svg","svg"); //Create a path in SVG's namespace
+		var innerhtml = '<ellipse  cx="'+dotInfo.x+'" cy="'+dotInfo.y+'"  fill="rgba(0,201,255,1)" rx="'+8/zoom+'" ry="'+8/zoom+'" ></ellipse><ellipse  cx="'+dotInfo.x+'" cy="'+dotInfo.y+'"   fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="'+4/zoom+'px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" rx="'+28/zoom+'" ry="'+28/zoom+'"></ellipse>';
+		newElement.innerHTML = innerhtml;
+		newElement.classList.add("dot");
+		slide.appendChild(newElement);
+		newElement.onclick = function() {
+			
+			if(dotInfo.descriptionField != ''){
+				toggleLabel(dotInfo.label,newElement,dotInfo.direction, true);
+				toggleDescription(dotInfo.descriptionId,dotInfo.descriptionField);
+			} else {
+				toggleLabel(dotInfo.label,newElement,dotInfo.direction, false);
+				disableDescription(dotInfo.descriptionId);
+			}
+		};
+	}
+	
+
+	function clearDots(){
+		var x = document.getElementsByClassName("dot");
+		var i;
+		for (i = 0; i < x.length; i++) {
+		  x[i].remove();
+		}
+	}
+	
+
+	
+	function placeDots(){
+			for(var i = 0; i < dots.length; i++){
+			var slideNumber = swiper.activeIndex + 1;
+			if(dots[i].slide == "slide_" + slideNumber)
+				placeDot(dots[i],swiper.zoom.currentScale);
+			}
+	}
+  </script>
+<!-- -->
+
+<!-- DESCRIPTIONS -->
+  <script>
+  
+  	function DisableAllDescriptionBoxs(){
+		disableDescription("description_1");
+		disableDescription("description_2");
+		disableDescription("description_3");
+		disableDescription("description_4");
+		disableDescription("description_5");
+	}
+
+	function disableDescription(elementId){
+		var description = document.getElementById(elementId);
+		if (description.style.display !== "none") {
+			description.classList.add("w3-animate-bottom-out");
+			description.classList.remove("w3-animate-bottom");
+		} 
+		var pagination = document.getElementById("nok-pagination");
+		pagination.style.display = 'block';
+	}
+	
+	function disableDescription(elementId){
+		var description = document.getElementById(elementId);
+		if (description.style.display !== "none") {
+			description.classList.add("w3-animate-bottom-out");
+			description.classList.remove("w3-animate-bottom");
+		} 
+		var pagination = document.getElementById("nok-pagination");
+		pagination.style.display = 'block';
 	}
 	
 	function showSlideDescription(){
 		var slideNumber = swiper.activeIndex + 1;
 		toggleDescription('description_'+slideNumber,'dbs_'+slideNumber,true)
 	}
-
-
+  
+  	function toggleDescription(elementId,dataId,hideLabels){
+		
+		var pagination = document.getElementById("nok-pagination");
+		
+		console.log(hideLabels);
+		if(hideLabels){
+			removeElementsByClass("label");
+			oldLabel='';
+		}
+		var description = document.getElementById(elementId);
+		if(dataId != olddataId){
+				pagination.style.display = 'none';
+				html="<h2>"+data[dataId].title+"</h2><p>"+data[dataId].text+"</p>";
+				description.innerHTML = html;
+				description.classList.remove("w3-animate-bottom-out");
+				description.classList.add("w3-animate-bottom");
+				//description.style.display = "block";
+				olddataId = dataId;
+		} else {
+			
+			disableDescription(elementId);
+			olddataId='';
+		}
+	}
+	
+	
   </script>
+<!-- -->
+
+<!-- LABELS -->
+  <script>
+    	function toggleLabel(text,element,direction,descriptionSizeCheck){		
+		removeElementsByClass("label");
+		if(oldLabel!=text && element){
+			oldLabel = text;
+			var label = document.createElement("div");
+			var html;
+			if(direction == 'right')
+				html = '<div class="container"><svg width="20" viewBox="0 0 24 2"><path fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="4px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Connection55" d="M 24 0 L 0 0"></path>/svg><div class="box">'+text+'</div></div>';
+			else
+				html = '<div class="container"><div class="box">'+text+'</div><svg width="20" viewBox="0 0 24 2"><path fill="transparent" stroke="rgba(0,201,255,1)" stroke-width="4px" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" shape-rendering="auto" id="Connection55" d="M 24 0 L 0 0"></path>/svg></div>';
+			label.innerHTML = html;
+			label.classList.add("label");
+			document.body.appendChild(label);
+			console.log(element.getBoundingClientRect());
+			var pos = element.getBoundingClientRect();
+			var top = pos.top-label.offsetHeight/2+pos.height/2;
+			label.style.top = top+'px';
+			var left = pos.left+pos.width/2-(direction=='left' ? label.offsetWidth : 0);
+			label.style.left = left+'px';
+			// ---------------------------
+			if(descriptionSizeCheck == true){
+				var bottomCalc = screen.height - pos.y;
+				console.log("bottom " +  bottomCalc + " height " + infoWindowHeight);
+				if(bottomCalc < infoWindowHeight)
+					disableLabels();			
+			}
+			// ---------------------------
+		} else {
+			oldLabel = '';
+		}
+	}
+
+	function disableLabels(){
+		removeElementsByClass("label");
+	}
+  </script>
+<!-- -->
+
+<!-- GENERAL -->  
+  <script>
+	function ShowHideResetView(){
+		/*
+		  // Hide reset_view if zoom level il == 1
+		var element = document.getElementsByClassName("reset_view")[0];
+		if(swiper.zoom.scale == 1){
+			element.style.visibility = "hidden";
+		}else{
+			element.style.visibility = "visible";
+		}
+		*/
+	}
+
+	function removeElementsByClass(className){
+		var elements = document.getElementsByClassName(className);
+		while(elements.length > 0){
+			elements[0].parentNode.removeChild(elements[0]);
+		}
+	}
+
+	function alert_coords(evt) {
+		pt.x = evt.clientX;
+		pt.y = evt.clientY;
+		// The cursor point, translated into svg coordinates
+		var cursorpt =  pt.matrixTransform(document.getElementById("slide_5").getScreenCTM().inverse());
+		console.log("x:" + Math.round(cursorpt.x) + ",y:" + Math.round(cursorpt.y));
+	}
+  </script>
+  <!-- -->
+
+<!-- STARTUP -->
+<script>
+	ShowHideResetView();
+	clearDots();
+	placeDots();
+</script>
+<!-- -->
+
 </body>
 </html>
