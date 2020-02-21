@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Nokia DBS 9928</title>
-  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=4.0">
 
   <!-- Injections -->
   <link rel="stylesheet" href="swiper.min.css">
@@ -56,7 +56,6 @@
     }
 
 	* {
-        -webkit-perspective: 0;
             margin: 0;
             padding: 0;
         }
@@ -139,7 +138,7 @@
 		}
 		.swiper-zoom-container{
 			height : 85%;
-			position:absolute;
+			position:relative;
 			z-index:1;
 		}
 		.toggle_info{
@@ -202,13 +201,15 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test20</div>
+    <div class="rectangle">Nokia DBS Cabinets test21</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
 			<div class="title">9928 OD (-48VDC) 1 ASMI (TDD+FDD)</div>
 			<div id="slide_1_container" class="swiper-zoom-container">
-			<img id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75" src="dbs-1.png">
+			<svg id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75">
+				<image x="0" y="0" width="701.08" height="1296.75" xlink:href="dbs-1.png" />
+			</svg>
 
 			</div>
 			<div id="description_1" class="description" onclick="disableDescription('description_1');disableLabels();"></div>
@@ -268,8 +269,13 @@
 	var infoWindowHeight = 300;
 	var oldLabel = "";
 	var swiper = new Swiper('.swiper-container', {
+		followFinger: false,
 		preloadImages: true,
 		updateOnImagesReady: true,
+		roundLengths: true,
+		watchOverflow: true,
+		allowTouchMove:false,
+		preventInteractionOnTransition:true,
 		zoom: {
 			maxRatio:6,
 			minRatio:1,
