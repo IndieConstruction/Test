@@ -28,10 +28,6 @@
       margin: 0;
       padding: 0;
     }
-    
-      .refresh{
-          visibility: hidden;
-      }
 
 	image {
 		image-rendering: auto;
@@ -643,11 +639,9 @@
 <!-- TOUCH -->
   <script>
   	swiper.on('touchEnd', function () {
-        $(document.body).addClass('refresh');
 	  removeElementsByClass("label");
 	  DisableAllDescriptionBoxs();
 	  ShowHideResetView();
-        $(document.body).removeClass('refresh');
 	});
   </script>
 <!-- -->
