@@ -28,6 +28,10 @@
       margin: 0;
       padding: 0;
     }
+    
+      .refresh{
+          visibility: hidden;
+      }
 
 	image {
 		image-rendering: auto;
@@ -201,7 +205,7 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test6</div>
+    <div class="rectangle">Nokia DBS Cabinets test7</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
@@ -566,14 +570,14 @@
 		registerTransitionCancelEvent(span, function(event){
 		console.log("registerTransitionCancelEvent");
 			disableLabels();
-			clearDots();
-			placeDots();
+			//clearDots();
+			//placeDots();
 		});
 		registerTransitionEndEvent(span, function(event){
 		console.log("registerTransitionEndEvent");
 			disableLabels();
-            clearDots();
-			placeDots();
+			//clearDots();
+			//placeDots();
 		});
 	}
 	
@@ -630,8 +634,8 @@
 	  removeElementsByClass("label");
 	  // removeElementsByClass("dot");
 	  DisableAllDescriptionBoxs();
-	  clearDots();
-	  placeDots();
+	  //clearDots();
+	  //placeDots();
 	});
   </script>
 <!-- -->
@@ -639,9 +643,11 @@
 <!-- TOUCH -->
   <script>
   	swiper.on('touchEnd', function () {
+        $(document.body).addClass('refresh');
 	  removeElementsByClass("label");
 	  DisableAllDescriptionBoxs();
 	  ShowHideResetView();
+        $(document.body).removeClass('refresh');
 	});
   </script>
 <!-- -->
