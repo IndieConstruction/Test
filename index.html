@@ -29,26 +29,6 @@
       padding: 0;
     }
 
-	svg { 
-    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated; /* Chrome */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-
-}
-      image { 
-    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
-    image-rendering: -moz-crisp-edges;          /* Firefox                        */
-    image-rendering: -o-crisp-edges;            /* Opera                          */
-    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
-    image-rendering: pixelated; /* Chrome */
-    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
-    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
-
-}
       svg{
           -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0) scale(1.0, 1.0);
@@ -223,7 +203,7 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test39</div>
+    <div class="rectangle">Nokia DBS Cabinets test40</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
@@ -307,8 +287,9 @@
 		allowTouchMove:false,
 		preventInteractionOnTransition:true,
 		*/
+        roundLengths: true,
 		zoom: {
-			maxRatio:6,
+			maxRatio:5,
 			minRatio:1,
 			toggle: true,
 			containerClass: 'swiper-zoom-container', 
