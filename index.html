@@ -29,12 +29,26 @@
       padding: 0;
     }
 
-	image {
-		image-rendering: auto;
-        image-resolution: 300dpi;
-        -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0) scale(1.0, 1.0);
-	}
+	svg { 
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated; /* Chrome */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+
+}
+      image { 
+    image-rendering: optimizeSpeed;             /* STOP SMOOTHING, GIVE ME SPEED  */
+    image-rendering: -moz-crisp-edges;          /* Firefox                        */
+    image-rendering: -o-crisp-edges;            /* Opera                          */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and eventually Safari) */
+    image-rendering: pixelated; /* Chrome */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed                  */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                           */
+
+}
       svg{
           -webkit-backface-visibility: hidden;
     -webkit-transform: translateZ(0) scale(1.0, 1.0);
@@ -209,15 +223,15 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test38</div>
+    <div class="rectangle">Nokia DBS Cabinets test39</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
 			<div class="title">9928 OD (-48VDC) 1 ASMI (TDD+FDD)</div>
 			<div id="slide_1_container" class="swiper-zoom-container">
-                <svg id="slide_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75" class="center-fit">
-                    <img src="dbs-1.png" height="100%" width="100%">
-                </svg>
+                <svg id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75">
+				<image x="0" y="0" width="701.08" height="1296.75" xlink:href="dbs-1.png" />
+			</svg>
 			</div>
 			<div id="description_1" class="description" onclick="disableDescription('description_1');disableLabels();"></div>
 		  </div>
