@@ -208,7 +208,7 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test34</div>
+    <div class="rectangle">Nokia DBS Cabinets test35</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
@@ -584,7 +584,8 @@
 		  var slide = document.getElementById("slide_"+slideNumber);
 		  var container = document.getElementById("slide_"+slideNumber+"_container");
 		  if(slide!=null)
-		  slide.style.transform = "scale3d(1,1,1)";
+		  slide.style.transform = "scale3d(5,5,5)";
+          container.style.transform = "scale3d(0.2,0.2,0.2)"
       });
 	
   
@@ -594,9 +595,9 @@
 		var slide = document.getElementById("slide_"+slideNumber);
 		var container = document.getElementById("slide_"+slideNumber+"_container");
 		if(slide!=null)
-		slide.style.transform = "translate3d(0px, 0px, 0px) scale3d(1,1,1)";
+		slide.style.transform = "scale3d(5,5,5)";
 		if(container!=null)
-		container.style.transform = "translate3d(0px, 0px, 0px) scale3d(1,1,1)";
+          container.style.transform = "scale3d(0.2,0.2,0.2)"
 	  // removeElementsByClass("label");
 	  removeElementsByClass("dot");
 	  console.log(swiper.activeIndex);
