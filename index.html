@@ -29,11 +29,6 @@
       padding: 0;
     }
 
-      svg{
-          -webkit-backface-visibility: hidden;
-    -webkit-transform: translateZ(0) scale(1.0, 1.0);
-      }
-
     .swiper-container {
         width: 100%;
         height: 100%;
@@ -209,9 +204,7 @@
 		  <div class="swiper-slide">
 			<div class="title">9928 OD (-48VDC) 1 ASMI (TDD+FDD)</div>
 			<div id="slide_1_container" class="swiper-zoom-container">
-                <svg id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75">
-				<image x="0" y="0" width="701.08" height="1296.75" xlink:href="dbs-1.png" />
-			</svg>
+                <img id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75" src="dbs-1.png"/>
 			</div>
 			<div id="description_1" class="description" onclick="disableDescription('description_1');disableLabels();"></div>
 		  </div>
@@ -582,7 +575,7 @@
 		  var slide = document.getElementById("slide_"+slideNumber);
 		  var container = document.getElementById("slide_"+slideNumber+"_container");
 		  if(slide!=null)
-		  slide.style.transform = "scale3d(5,5,5)";
+		  slide.style.transform = "scale3d(1,1,1)";
       });
 	
   
@@ -592,9 +585,8 @@
 		var slide = document.getElementById("slide_"+slideNumber);
 		var container = document.getElementById("slide_"+slideNumber+"_container");
 		if(slide!=null)
-		slide.style.transform = "scale3d(5,5,5)";
-		if(container!=null)
-          container.style.transform = "scale3d(0.2,0.2,0.2)"
+		slide.style.transform = "scale3d(1,1,1)";
+        
 	  // removeElementsByClass("label");
 	  removeElementsByClass("dot");
 	  console.log(swiper.activeIndex);
@@ -603,6 +595,7 @@
 	});
 	
 	swiper.on('transitionEnd', function () {
+    
 	  removeElementsByClass("dot");
 	  removeElementsByClass("label");
 	  clearDots();
