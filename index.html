@@ -1,5 +1,6 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, minimum-scale=1, maximum-scale=1">
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.css">
         <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 
@@ -74,6 +75,11 @@
             // And if we need scrollbar
             scrollbar: {
               el: '.swiper-scrollbar',
+            },
+              
+            // mousewheel support
+            mousewheel: {
+              invert: true,
             },
           })
          </script>
