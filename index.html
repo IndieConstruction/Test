@@ -199,7 +199,7 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test44</div>
+    <div class="rectangle">Nokia DBS Cabinets test45</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
@@ -566,7 +566,7 @@
 		  var slide = document.getElementById("slide_"+slideNumber);
 		  var container = document.getElementById("slide_"+slideNumber+"_container");
 		  if(slide!=null)
-		  slide.style.transform = "scale3d(1,1,1)";
+		  slide.style.transform = "translateZ(0) scale3d(1,1,1)";
       });
 	
   
@@ -576,9 +576,9 @@
 		var slide = document.getElementById("slide_"+slideNumber);
 		var container = document.getElementById("slide_"+slideNumber+"_container");
 		if(slide!=null)
-		slide.style.transform = "scale3d(1,1,1)";
+		slide.style.transform = "translateZ(0) scale3d(1,1,1)";
 		if(container!=null)
-          container.style.transform = "scale3d(1,1,1)"
+          container.style.transform = "translateZ(0) scale3d(1,1,1)"
 	  // removeElementsByClass("label");
 	  removeElementsByClass("dot");
 	  console.log(swiper.activeIndex);
@@ -602,14 +602,27 @@
   	/// FUNCTIONS ----------------------------------
 	function zoomIn(){
 		swiper.zoom.in();
+        var slideNumber = swiper.activeIndex;
+		var slide = document.getElementById("slide_"+slideNumber);
+		if(slide!=null)
+		slide.style.transform = "translateZ(0)";
+        
 	}
 	
 	function zoomOut(){
 		swiper.zoom.out();
+        var slideNumber = swiper.activeIndex;
+		var slide = document.getElementById("slide_"+slideNumber);
+		if(slide!=null)
+		slide.style.transform = "translateZ(0)";
 	}
 	
 	function resetZoom(){
 		swiper.zoom.out();
+        var slideNumber = swiper.activeIndex;
+		var slide = document.getElementById("slide_"+slideNumber);
+		if(slide!=null)
+		slide.style.transform = "translateZ(0)";
 		disableLabels();
 		clearDots();
 		placeDots();

@@ -6278,7 +6278,7 @@
         $el.transform(("translate3d(" + x + ", " + y + ", 0px)"));
       } else {
         var currentScale = scale - ((scale - 1) * (1 - Math.abs(progress)));
-        $el.transform(("translate3d(" + x + ", " + y + ", 0px) scale3d(" + currentScale + ","+currentScale+","+currentScale+ ")"));
+        $el.transform(("translateZ(0) scale3d(" + currentScale + ","+currentScale+","+currentScale+ ")"));
       }
     },
     setTranslate: function setTranslate() {
