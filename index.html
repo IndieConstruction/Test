@@ -29,6 +29,11 @@
       padding: 0;
     }
 
+      svg{
+          -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1.0, 1.0);
+      }
+
     .swiper-container {
         width: 100%;
         height: 100%;
@@ -62,7 +67,7 @@
 			grid-template-rows: auto 1fr;
         }
         .center-fit {
-            width: 100%;
+            width: 2500px;
             max-height: 100vh;
             margin: auto;
         }
@@ -198,13 +203,15 @@
 	<div onclick="resetZoom()" class="reset_view"><img src="Center@2x.png"/></div>
     
 	<!-- Swiper -->
-    <div class="rectangle">Nokia DBS Cabinets test40</div>
+    <div class="rectangle">Nokia DBS Cabinets test42</div>
 	<div class="swiper-container">
 		<div class="swiper-wrapper">
 		  <div class="swiper-slide">
 			<div class="title">9928 OD (-48VDC) 1 ASMI (TDD+FDD)</div>
 			<div id="slide_1_container" class="swiper-zoom-container">
-                <img id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75" src="dbs-1.png"/>
+                <svg id="slide_1" class="center-fit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 701.08 1296.75">
+				<image  xlink:href="dbs-1.png" style="width: 1402px; height: 2592px;transform: scale3d(0.5,0.5,0.5);"/>
+			</svg>
 			</div>
 			<div id="description_1" class="description" onclick="disableDescription('description_1');disableLabels();"></div>
 		  </div>
@@ -575,7 +582,7 @@
 		  var slide = document.getElementById("slide_"+slideNumber);
 		  var container = document.getElementById("slide_"+slideNumber+"_container");
 		  if(slide!=null)
-		  slide.style.transform = "scale3d(1,1,1)";
+		  slide.style.transform = "scale3d(5,5,5)";
       });
 	
   
@@ -585,8 +592,9 @@
 		var slide = document.getElementById("slide_"+slideNumber);
 		var container = document.getElementById("slide_"+slideNumber+"_container");
 		if(slide!=null)
-		slide.style.transform = "scale3d(1,1,1)";
-        
+		slide.style.transform = "scale3d(5,5,5)";
+		if(container!=null)
+          container.style.transform = "scale3d(0.2,0.2,0.2)"
 	  // removeElementsByClass("label");
 	  removeElementsByClass("dot");
 	  console.log(swiper.activeIndex);
@@ -595,7 +603,6 @@
 	});
 	
 	swiper.on('transitionEnd', function () {
-    
 	  removeElementsByClass("dot");
 	  removeElementsByClass("label");
 	  clearDots();
