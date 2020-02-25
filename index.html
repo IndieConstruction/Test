@@ -71,16 +71,20 @@
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
             },
+              
+              zoom: {
+			maxRatio:5,
+			minRatio:1,
+			toggle: true,
+			containerClass: 'swiper-zoom-container', 
+			zoomedSlideClass: 'center-fit', 
+		},
 
             // And if we need scrollbar
             scrollbar: {
               el: '.swiper-scrollbar',
             },
-              
-            // mousewheel support
-            mousewheel: {
-              invert: true,
-            },
+
           })
          </script>
     </body>
